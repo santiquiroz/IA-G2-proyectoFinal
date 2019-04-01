@@ -62,10 +62,12 @@ def getTotal(es,inferior,fechaFinal,intervaloSegundos,directorio):
         inferior=superior
     
     #escribiendo en disco
-    print("Guardando en disco.")
-    entradas=len(cantidad)
-    df = pd.DataFrame({'Intervalo': intervalo,'VEIzquierda':[None]*entradas,'VEDerecha':[None]*entradas,'Etiquetado':[None]*entradas,'Cantidad': cantidad,'Datos':datos})
+    
+    #entradas=len(cantidad)
+    #df = pd.DataFrame({'Intervalo': intervalo,'VEIzquierda':[None]*entradas,'VEDerecha':[None]*entradas,'Etiquetado':[None]*entradas,'Cantidad': cantidad,'Datos':datos})
+    df = pd.DataFrame({'Intervalo': intervalo,'Cantidad': cantidad,'Datos':datos})
     print(df)
+    print("Guardando en disco.")
     writer = pd.ExcelWriter(directorio, engine='xlsxwriter')
     df.to_excel(writer,index_label = 'indice', sheet_name='hoja1')
     writer.save()
