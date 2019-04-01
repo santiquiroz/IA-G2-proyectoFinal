@@ -63,18 +63,22 @@ def getTotal(es,inferior,fechaFinal,intervaloSegundos,directorio):
     
     #escribiendo en disco
     
-    #entradas=len(cantidad)
+    entradas=len(cantidad)
     #df = pd.DataFrame({'Intervalo': intervalo,'VEIzquierda':[None]*entradas,'VEDerecha':[None]*entradas,'Etiquetado':[None]*entradas,'Cantidad': cantidad,'Datos':datos})
-    df = pd.DataFrame({'Intervalo': intervalo,'Cantidad': cantidad,'Datos':datos})
+    df = pd.DataFrame({'Intervalo': intervalo,'Etiquetado':[None]*entradas,'Cantidad': cantidad,'Datos':datos})
     print(df)
     print("Guardando en disco.")
-    writer = pd.ExcelWriter(directorio, engine='xlsxwriter')
+    writer = pd.ExcelWriter(directorio+".xlsx", engine='xlsxwriter')
+    df.to_excel(writer,index_label = 'indice', sheet_name='hoja1')
+    writer.save()
+    df = pd.DataFrame({'Intervalo': intervalo,'Etiquetado':[None]*entradas,'Cantidad': cantidad})
+    writer = pd.ExcelWriter(directorio+"SINDATOS.xlsx", engine='xlsxwriter')
     df.to_excel(writer,index_label = 'indice', sheet_name='hoja1')
     writer.save()
     return True
 def getTrainingData(es,intervaloSegundos = 5):
-    directorio = "./Entrenamiento/training.xlsx"
-    fechaInicial= datetime.strptime('2019-03-22 12:00:00', '%Y-%m-%d %H:%M:%S')
+    directorio = "./Entrenamiento/training"
+    fechaInicial= datetime.strptime('2019-03-24 11:00:00', '%Y-%m-%d %H:%M:%S')
     fechaFinal= datetime.strptime('2019-03-24 12:00:00', '%Y-%m-%d %H:%M:%S')
     print("inicial: "+fechaInicial.strftime('%Y-%m-%d %H:%M:%S'))
     print("final: "+fechaFinal.strftime('%Y-%m-%d %H:%M:%S'))
@@ -82,7 +86,7 @@ def getTrainingData(es,intervaloSegundos = 5):
     return True
     
 def getActualData(es,intervaloSegundos = 5):
-    directorio = "./Evaluacion/evaluation.xlsx"
+    directorio = "./Evaluacion/evaluation"
     fechaFinal= datetime.now()
     fechaInicial= fechaFinal-timedelta(hours=1)
     print("inicial: "+fechaInicial.strftime('%Y-%m-%d %H:%M:%S'))
