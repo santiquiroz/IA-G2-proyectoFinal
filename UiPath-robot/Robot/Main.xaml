@@ -77,7 +77,7 @@
           <av:Size x:Key="ShapeSize">200,52.8</av:Size>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <Sequence sap:VirtualizedContainerService.HintSize="576.8,2016" sap2010:WorkflowViewState.IdRef="Sequence_8">
+      <Sequence sap:VirtualizedContainerService.HintSize="613.6,2016" sap2010:WorkflowViewState.IdRef="Sequence_8">
         <Sequence.Variables>
           <Variable x:TypeArguments="ui:WorkbookApplication" Name="trainingExcel" />
           <Variable x:TypeArguments="x:Int32" Default="4" Name="i" />
@@ -91,7 +91,7 @@
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
-        <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel Application Scope" sap:VirtualizedContainerService.HintSize="554.4,1891.2" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_1" Workbook="[trainingExcel]" WorkbookPath="C:\Users\santi\Documents\GitHub\IA-G2-proyectoFinal\python\Entrenamiento\trainingSINDATOS.xlsx">
+        <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel Application Scope" sap:VirtualizedContainerService.HintSize="591.2,1891.2" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_1" Workbook="[trainingExcel]" WorkbookPath="C:\Users\santi\Documents\GitHub\IA-G2-proyectoFinal\python\Evaluacion\evaluationSINDATOS.xlsx">
           <ui:ExcelApplicationScope.Body>
             <ActivityAction x:TypeArguments="ui:WorkbookApplication">
               <ActivityAction.Argument>
@@ -148,7 +148,7 @@
                         <InArgument x:TypeArguments="x:Double">[Double.Parse(check)]</InArgument>
                       </Assign.Value>
                     </Assign>
-                    <If Condition="[((siguiente&gt;=(anterior-15))AND(siguiente&lt;=(anterior+15)))]" sap:VirtualizedContainerService.HintSize="469.6,389.6" sap2010:WorkflowViewState.IdRef="If_1">
+                    <If Condition="[((siguiente&gt;=(anterior-9))AND(siguiente&lt;=(anterior+9)))]" sap:VirtualizedContainerService.HintSize="469.6,389.6" sap2010:WorkflowViewState.IdRef="If_1">
                       <If.Then>
                         <Sequence sap:VirtualizedContainerService.HintSize="222.4,240" sap2010:WorkflowViewState.IdRef="Sequence_14">
                           <sap:WorkflowViewStateService.ViewState>
