@@ -98,14 +98,24 @@ def clasificar(url,numeroAnteriores=30):
   hoja=doc.get_sheet_by_name("hoja1")
   #.cell(row=1,column=1).value
   cambioAnteriores=[]
+  hoja.cell(row=1,column=5).value = "promedioCambioAnterior"
+  hoja.cell(row=1,column=6).value = "cambio"
   anterior = hoja.cell(row=2,column=4).value
   hoja.cell(row=2,column=3).value = "normal"  
-  siguiente = hoja.cell(row=3,column=4).value
+  hoja.cell(row=2,column=5).value = 0.0  
+  hoja.cell(row=2,column=6).value = 0.0 
   hoja.cell(row=3,column=3).value = "normal"
+  hoja.cell(row=2,column=5).value = 0.0  
+  siguiente = hoja.cell(row=3,column=4).value
+  hoja.cell(row=3,column=5).value = 0.0
+  
+  
   cambio=0
   if siguiente != None:
+    promedioCambioAnterior=0.0
     cambio=abs(int(anterior)-int(siguiente))/int(anterior)
     cambioAnteriores.append(cambio)
+    hoja.cell(row=3,column=6).value = cambio
   else:
     print("Error: campo nulo.")
     return  True
@@ -119,7 +129,8 @@ def clasificar(url,numeroAnteriores=30):
   while(siguiente != None):
     
     cambio=abs(int(anterior)-int(siguiente))/int(anterior)
-    if(cambio>(np.average(cambioAnteriores)+0.2)):
+    promedioCambioAnterior=np.average(cambioAnteriores)+0.15
+    if(cambio>promedioCambioAnterior):
       hoja.cell(row=i,column=3).value = "anormal"
       cambio=cambioAnteriores[-1]
       if(len(cambioAnteriores)==numeroAnteriores):
@@ -134,7 +145,8 @@ def clasificar(url,numeroAnteriores=30):
         cambioAnteriores.append(cambio)
       else:
         cambioAnteriores.append(cambio)
-
+    hoja.cell(row=i,column=5).value = promedioCambioAnterior
+    hoja.cell(row=i,column=6).value = cambio
     anterior = siguiente
     i = i+1
     siguiente= hoja.cell(row=i,column=4).value
